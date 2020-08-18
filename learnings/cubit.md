@@ -74,7 +74,7 @@ class SimpleBlocObserver extends BlocObserver {
 }
 
 void main() {
-  Bloc.observer = SimpleBlocObserver();
+  Bloc.observer = SimpleBlocObserver(); // interesting init
   CounterCubit()
     ..increment()
     ..close();
@@ -97,7 +97,7 @@ class CounterCubit extends Cubit<int> {
   CounterCubit() : super(0);
 
   void increment() {
-    addError(Exception('increment error!'), StackTrace.current);
+    addError(Exception('increment error!'), StackTrace.current); // invokes the error
     emit(state + 1);
   }
 
