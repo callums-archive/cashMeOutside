@@ -1,0 +1,31 @@
+{
+  "name": "cashmeoutside",
+  "version": "1.0.0",
+  "description": "Flutter app for figuring out what cash is needed once payment is requested using the bloc pattern",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/howzitcal/cashMeOutside.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/howzitcal/cashMeOutside/issues"
+  },
+  "homepage": "https://github.com/howzitcal/cashMeOutside#readme",
+  "dependencies": {
+    "commitizen": "^4.1.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
