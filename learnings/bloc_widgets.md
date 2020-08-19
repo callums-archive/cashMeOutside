@@ -176,3 +176,86 @@ MultiBlocListener(
 ```
 
 #### 6 BlocConsumer
+
+```dart
+BlocConsumer<BlocA, BlocAState>(
+  listener: (context, state) {
+    // do stuff here based on BlocA's state
+  },
+  builder: (context, state) {
+    // return widget here based on BlocA's state
+  }
+)
+```
+
+```dart
+BlocConsumer<BlocA, BlocAState>(
+  listenWhen: (previous, current) {
+    // return true/false to determine whether or not
+    // to invoke listener with state
+  },
+  listener: (context, state) {
+    // do stuff here based on BlocA's state
+  },
+  buildWhen: (previous, current) {
+    // return true/false to determine whether or not
+    // to rebuild the widget with state
+  },
+  builder: (context, state) {
+    // return widget here based on BlocA's state
+  }
+)
+```
+
+#### 7 Repository Provider
+
+```dart
+RepositoryProvider(
+  create: (context) => RepositoryA(),
+  child: ChildA(),
+);
+
+// with extensions
+context.repository<RepositoryA>();
+
+// without extensions
+RepositoryProvider.of<RepositoryA>(context)
+```
+
+#### 8 Repository Provider
+
+from
+
+```dart
+RepositoryProvider<RepositoryA>(
+  create: (context) => RepositoryA(),
+  child: RepositoryProvider<RepositoryB>(
+    create: (context) => RepositoryB(),
+    child: RepositoryProvider<RepositoryC>(
+      create: (context) => RepositoryC(),
+      child: ChildA(),
+    )
+  )
+)
+```
+
+to
+
+```dart
+MultiRepositoryProvider(
+  providers: [
+    RepositoryProvider<RepositoryA>(
+      create: (context) => RepositoryA(),
+    ),
+    RepositoryProvider<RepositoryB>(
+      create: (context) => RepositoryB(),
+    ),
+    RepositoryProvider<RepositoryC>(
+      create: (context) => RepositoryC(),
+    ),
+  ],
+  child: ChildA(),
+)
+```
+
+this is more a reference to the docs now
