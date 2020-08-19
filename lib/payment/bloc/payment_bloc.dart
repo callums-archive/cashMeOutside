@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:cashMeOutside/payment/bloc/paymentEvents.dart';
-import 'package:cashMeOutside/payment/bloc/paymentState.dart';
+import 'package:cashMeOutside/payment/bloc/payment_events.dart';
+import 'package:cashMeOutside/payment/bloc/payment_state.dart';
 
 class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   PaymentBloc(double amountDue) : super(PaymentState(initAmountDue: amountDue));
@@ -17,15 +17,3 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     yield state;
   }
 }
-
-// Future<void> main() async {
-//   PaymentBloc pb = PaymentBloc(44.99);
-
-//   print(pb.state.paymentMade);
-
-//   pb.add(AddPayment(amount: 33.33));
-
-//   print(pb.state.paymentMade);
-
-//   pb.close();
-// }
