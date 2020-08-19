@@ -14,7 +14,7 @@
 enum CounterEvent { increment }
 
 class CounterBloc extends Bloc<CounterEvent, int> {
-  CounterBloc() : super(0);
+  CounterBloc() super(0);
 }
 ```
 
