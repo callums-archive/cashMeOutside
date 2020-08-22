@@ -17,11 +17,20 @@ class PaymentForm extends StatefulWidget {
 class PaymentFormState extends State<PaymentForm> {
   final _formKey = GlobalKey<FormState>();
 
+  bool _isValid = false;
+
   @override
   Widget build(BuildContext context) {
-    print("AWE AWE AWE ${widget._paymentState.amountDue}");
     return Form(
       key: _formKey,
+      onChanged: () {
+        final isValid = _formKey.currentState.validate();
+        if (_isValid != isValid) {
+          setState(() {
+            _isValid = isValid;
+          });
+        }
+      },
       child: Expanded(
           child: Column(
         children: <Widget>[
@@ -31,8 +40,9 @@ class PaymentFormState extends State<PaymentForm> {
               padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
               child: TextFormField(
                 validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
+                  var payment = double.tryParse(value) ?? 0;
+                  if (payment < widget._paymentState.amountDue) {
+                    return 'Payment amount is too low.';
                   }
                   return null;
                 },
@@ -61,7 +71,6 @@ class PaymentFormState extends State<PaymentForm> {
                 child: RaisedButton(
                   onPressed: () {
                     // context.bloc<PaymentBloc>().add(AddPayment(amount: 33.33));
-
                     if (_formKey.currentState.validate()) {
                       showSnackBar(
                           context, "Please Wait...", Colors.blueAccent);
