@@ -1,5 +1,3 @@
-// enum PaymentEvent { addPayment, submitPayment }
-
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
