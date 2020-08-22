@@ -16,4 +16,12 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     state.paymentMade = payment.amount;
     yield state;
   }
+
+  @override
+  void onChange(Change<PaymentState> change) {
+    print("there has been a change");
+    print("current: ${change.currentState.paymentMade}");
+    print("next: ${change.nextState.paymentMade}");
+    super.onChange(change);
+  }
 }

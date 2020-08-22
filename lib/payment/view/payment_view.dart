@@ -22,7 +22,6 @@ class PaymentView extends StatelessWidget {
           return Column(children: <Widget>[
             RaisedButton(
               onPressed: () {
-                print("pad");
                 payment(1235.0);
               },
               child: Text(
@@ -51,7 +50,7 @@ class PaymentView extends StatelessWidget {
                     );
                   })
                 ])),
-            PaymentForm()
+            PaymentForm(state)
           ]);
         }));
   }

@@ -1,16 +1,17 @@
-import 'package:cashMeOutside/payment/bloc/payment_bloc.dart';
-import 'package:cashMeOutside/payment/bloc/payment_events.dart';
+import 'package:cashMeOutside/payment/bloc/payment_state.dart';
 import 'package:cashMeOutside/tools/decimal_text_input_formatter.dart';
 import 'package:cashMeOutside/tools/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PaymentForm extends StatefulWidget {
-  @override
-  PaymentFormState createState() {
-    return PaymentFormState();
+  PaymentState _paymentState;
+  PaymentForm(PaymentState paymentState) {
+    this._paymentState = paymentState;
   }
+
+  @override
+  PaymentFormState createState() => new PaymentFormState();
 }
 
 class PaymentFormState extends State<PaymentForm> {
@@ -18,6 +19,7 @@ class PaymentFormState extends State<PaymentForm> {
 
   @override
   Widget build(BuildContext context) {
+    print("AWE AWE AWE ${widget._paymentState.amountDue}");
     return Form(
       key: _formKey,
       child: Expanded(
@@ -58,8 +60,7 @@ class PaymentFormState extends State<PaymentForm> {
                 height: 50.0,
                 child: RaisedButton(
                   onPressed: () {
-                    print("boom");
-                    context.bloc<PaymentBloc>().add(AddPayment(amount: 33.33));
+                    // context.bloc<PaymentBloc>().add(AddPayment(amount: 33.33));
 
                     if (_formKey.currentState.validate()) {
                       showSnackBar(
