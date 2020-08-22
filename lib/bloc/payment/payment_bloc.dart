@@ -7,12 +7,13 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
 
   @override
   Stream<PaymentState> mapEventToState(PaymentEvent event) async* {
-    if (event is AddPayment) {
-      yield* _mapAddPaymentToState(event);
+    if (event is ProcessPayment) {
+      yield* _mapProcessPaymentToState(event);
     }
   }
 
-  Stream<PaymentState> _mapAddPaymentToState(AddPayment payment) async* {
+  Stream<PaymentState> _mapProcessPaymentToState(
+      ProcessPayment payment) async* {
     state.paymentMade = payment.amount;
     yield state;
   }

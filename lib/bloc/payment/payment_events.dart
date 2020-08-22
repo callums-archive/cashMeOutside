@@ -8,9 +8,9 @@ abstract class PaymentEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AddPayment extends PaymentEvent {
+class ProcessPayment extends PaymentEvent {
   final double amount;
-  const AddPayment({@required this.amount});
+  const ProcessPayment({@required this.amount});
 }
 
 class ProcessPayment extends PaymentEvent {}
