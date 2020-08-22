@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:cashMeOutside/breakdown/view/breakdown_page.dart';
+import 'package:cashMeOutside/payment/view/payment_page.dart';
 import 'package:flutter/material.dart';
-import 'app.dart';
 
 class CounterObserver extends BlocObserver {
   @override
@@ -12,5 +13,11 @@ class CounterObserver extends BlocObserver {
 
 void main() {
   Bloc.observer = CounterObserver();
-  runApp(PaymentApp());
+  runApp(MaterialApp(
+    initialRoute: "/",
+    routes: {
+      "/": (context) => PaymentPage(),
+      "/breakdown": (context) => BreakdownPage()
+    },
+  ));
 }

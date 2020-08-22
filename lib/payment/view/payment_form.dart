@@ -1,8 +1,11 @@
-import 'package:cashMeOutside/payment/bloc/payment_state.dart';
+import 'package:cashMeOutside/bloc/payment/payment_events.dart';
+import 'package:cashMeOutside/bloc/payment/payment_state.dart';
+import 'package:cashMeOutside/bloc/payment_bloc.dart';
 import 'package:cashMeOutside/tools/decimal_text_input_formatter.dart';
 import 'package:cashMeOutside/tools/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PaymentForm extends StatefulWidget {
   PaymentState _paymentState;
@@ -18,6 +21,7 @@ class PaymentFormState extends State<PaymentForm> {
   final _formKey = GlobalKey<FormState>();
 
   bool _isValid = false;
+  final paymentAmount = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,7 @@ class PaymentFormState extends State<PaymentForm> {
             child: Container(
               padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
               child: TextFormField(
+                controller: paymentAmount,
                 validator: (value) {
                   var payment = double.tryParse(value) ?? 0;
                   if (payment < widget._paymentState.amountDue) {
@@ -70,10 +75,15 @@ class PaymentFormState extends State<PaymentForm> {
                 height: 50.0,
                 child: RaisedButton(
                   onPressed: () {
-                    // context.bloc<PaymentBloc>().add(AddPayment(amount: 33.33));
                     if (_formKey.currentState.validate()) {
-                      showSnackBar(
-                          context, "Please Wait...", Colors.blueAccent);
+                      double payment = double.parse(paymentAmount.text);
+                      var paymentBloc = BlocProvider.of<PaymentBloc>(context);
+                      paymentBloc.add(AddPayment(amount: payment));
+                      paymentBloc.close();
+                      Navigator.pushNamed(context, "/breakdown");
+                    } else {
+                      showSnackBar(context, "Please correct the errors",
+                          Colors.redAccent);
                     }
                   },
                   child: Text(

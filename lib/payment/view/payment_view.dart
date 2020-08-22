@@ -1,10 +1,8 @@
-import 'package:cashMeOutside/payment/bloc/payment_events.dart';
-import 'package:cashMeOutside/payment/bloc/payment_state.dart';
+import 'package:cashMeOutside/bloc/payment/payment_state.dart';
+import 'package:cashMeOutside/bloc/payment_bloc.dart';
 import 'package:cashMeOutside/payment/view/payment_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../bloc/payment_bloc.dart';
 
 class PaymentView extends StatelessWidget {
   @override
@@ -12,24 +10,7 @@ class PaymentView extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(title: Text("Payment")),
         body: BlocBuilder<PaymentBloc, PaymentState>(builder: (context, state) {
-          void payment(ad) {
-            var t = context.bloc<PaymentBloc>();
-            t.add(AddPayment(amount: ad));
-            t.close();
-            print(state.paymentMade);
-          }
-
           return Column(children: <Widget>[
-            RaisedButton(
-              onPressed: () {
-                payment(1235.0);
-              },
-              child: Text(
-                "Process",
-                style: TextStyle(fontSize: 20.0),
-              ),
-              color: Colors.greenAccent,
-            ),
             Container(
                 padding: EdgeInsets.all(20.0),
                 child: Row(children: <Widget>[

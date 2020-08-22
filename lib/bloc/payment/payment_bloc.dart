@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:cashMeOutside/payment/bloc/payment_events.dart';
-import 'package:cashMeOutside/payment/bloc/payment_state.dart';
+import "./payment_state.dart";
+import "./payment_events.dart";
 
 class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   PaymentBloc(double amountDue) : super(PaymentState(initAmountDue: amountDue));
@@ -19,9 +19,9 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
 
   @override
   void onChange(Change<PaymentState> change) {
-    print("there has been a change");
-    print("current: ${change.currentState.paymentMade}");
-    print("next: ${change.nextState.paymentMade}");
+    // print("there has been a change");
+    // print("current: ${change.currentState.paymentMade}");
+    // print("next: ${change.nextState.paymentMade}");
     super.onChange(change);
   }
 }
