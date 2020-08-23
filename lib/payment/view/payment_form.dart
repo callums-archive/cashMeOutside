@@ -1,6 +1,5 @@
-import 'package:cashMeOutside/bloc/payment/payment_events.dart';
-import 'package:cashMeOutside/bloc/payment/payment_state.dart';
-import 'package:cashMeOutside/bloc/payment_bloc.dart';
+import 'package:cashMeOutside/cubit/payment/payment_cubit.dart';
+import 'package:cashMeOutside/cubit/payment/payment_state.dart';
 import 'package:cashMeOutside/tools/decimal_text_input_formatter.dart';
 import 'package:cashMeOutside/tools/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -78,11 +77,12 @@ class PaymentFormState extends State<PaymentForm> {
                     if (_formKey.currentState.validate()) {
                       double payment = double.parse(paymentAmount.text);
 
-                      var paymentBloc = BlocProvider.of<PaymentBloc>(context);
-                      paymentBloc.add(ProcessPayment(amount: payment));
+                      var paymentBloc = BlocProvider.of<PaymentCubit>(context);
+
+                      print(paymentBloc.processPayment(payment));
                       paymentBloc.close();
 
-                      // Navigator.pushNamed(context, "/breakdown");
+                      Navigator.pushNamed(context, "/breakdown");
                     } else {
                       showSnackBar(context, "Please correct the errors",
                           Colors.redAccent);

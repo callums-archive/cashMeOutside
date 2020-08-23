@@ -1,4 +1,4 @@
-import 'package:cashMeOutside/bloc/payment_bloc.dart';
+import 'package:cashMeOutside/cubit/payment/payment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'payment_view.dart';
@@ -9,6 +9,6 @@ class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) => PaymentBloc(35.00), child: PaymentView());
+        create: (_) => PaymentCubit(23.40), child: PaymentView());
   }
 }

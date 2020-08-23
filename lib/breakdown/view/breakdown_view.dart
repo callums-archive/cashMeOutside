@@ -1,5 +1,5 @@
-import 'package:cashMeOutside/bloc/payment/payment_state.dart';
-import 'package:cashMeOutside/bloc/payment_bloc.dart';
+import 'package:cashMeOutside/cubit/payment/payment_cubit.dart';
+import 'package:cashMeOutside/cubit/payment/payment_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,8 +11,9 @@ class BreakdownView extends StatelessWidget {
           title: Text("Breakdown"),
           backgroundColor: Colors.greenAccent,
         ),
-        body: BlocBuilder<PaymentBloc, PaymentState>(builder: (context, state) {
-          return Text("There is data here");
+        body:
+            BlocBuilder<PaymentCubit, PaymentState>(builder: (context, state) {
+          return Text("state => $state");
         }));
   }
 }

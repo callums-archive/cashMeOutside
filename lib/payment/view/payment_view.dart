@@ -1,5 +1,5 @@
-import 'package:cashMeOutside/bloc/payment/payment_state.dart';
-import 'package:cashMeOutside/bloc/payment_bloc.dart';
+import 'package:cashMeOutside/cubit/payment/payment_cubit.dart';
+import 'package:cashMeOutside/cubit/payment/payment_state.dart';
 import 'package:cashMeOutside/payment/view/payment_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +9,8 @@ class PaymentView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text("Payment")),
-        body: BlocBuilder<PaymentBloc, PaymentState>(builder: (context, state) {
+        body:
+            BlocBuilder<PaymentCubit, PaymentState>(builder: (context, state) {
           return Column(children: <Widget>[
             Container(
                 padding: EdgeInsets.all(20.0),
@@ -22,10 +23,10 @@ class PaymentView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  BlocBuilder<PaymentBloc, PaymentState>(
+                  BlocBuilder<PaymentCubit, PaymentState>(
                       builder: (context, state) {
                     return Text(
-                      "R${state.amountDue}",
+                      "R${state.amountDue.toStringAsFixed(2)}",
                       style: TextStyle(
                           fontSize: 25.0, fontWeight: FontWeight.bold),
                     );
