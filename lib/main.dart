@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 class CounterObserver extends BlocObserver {
   @override
   void onChange(Cubit cubit, Change change) {
-    print('${cubit.runtimeType} $change');
+    print(
+        "there are changes ${cubit.runtimeType} => ${change.currentState.paymentMade} ${change.nextState.paymentMade}");
+    // print('${cubit.runtimeType} $change');
     super.onChange(cubit, change);
   }
 }

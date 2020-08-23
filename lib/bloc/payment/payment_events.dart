@@ -12,5 +12,3 @@ class ProcessPayment extends PaymentEvent {
   final double amount;
   const ProcessPayment({@required this.amount});
 }
-
-class ProcessPayment extends PaymentEvent {}

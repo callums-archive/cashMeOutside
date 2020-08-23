@@ -77,10 +77,12 @@ class PaymentFormState extends State<PaymentForm> {
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
                       double payment = double.parse(paymentAmount.text);
+
                       var paymentBloc = BlocProvider.of<PaymentBloc>(context);
                       paymentBloc.add(ProcessPayment(amount: payment));
                       paymentBloc.close();
-                      Navigator.pushNamed(context, "/breakdown");
+
+                      // Navigator.pushNamed(context, "/breakdown");
                     } else {
                       showSnackBar(context, "Please correct the errors",
                           Colors.redAccent);

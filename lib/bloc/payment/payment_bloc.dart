@@ -14,15 +14,32 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
 
   Stream<PaymentState> _mapProcessPaymentToState(
       ProcessPayment payment) async* {
-    state.paymentMade = payment.amount;
     yield state;
   }
 
   @override
-  void onChange(Change<PaymentState> change) {
-    // print("there has been a change");
-    // print("current: ${change.currentState.paymentMade}");
-    // print("next: ${change.nextState.paymentMade}");
-    super.onChange(change);
+  void onEvent(Object event) {
+    print('$event');
+    super.onEvent(event);
   }
+
+  // @override
+  // void onTransition(Transition<PaymentEvent, PaymentState> transition) {
+  //   print(transition);
+  //   super.onTransition(transition);
+  // }
+
+  // @override
+  // void onChange(Change<PaymentState> change) {
+  //   print("there has been a change");
+  //   print("current: ${change.currentState.paymentMade}");
+  //   print("next: ${change.nextState.paymentMade}");
+  //   super.onChange(change);
+  // }
+
+  // @override
+  // void onError(Object error, StackTrace stackTrace) {
+  //   print('$error $stackTrace');
+  //   super.onError(error, stackTrace);
+  // }
 }
