@@ -19,7 +19,7 @@ void main() {
   runApp(MaterialApp(
     initialRoute: "/",
     routes: {
-      "/": (context) => PaymentPage(),
+      "/": (context) => PaymentScreen(),
     },
   ));
 }

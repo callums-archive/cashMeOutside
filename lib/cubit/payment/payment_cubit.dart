@@ -7,18 +7,8 @@ class PaymentCubit extends Cubit<PaymentState> {
       : super(PaymentState(initAmountDue: initialAmount));
 
   processPayment(double amount) {
-    // state.paymentMade = amount;
-    // CashBreakdown cashBreakdown = new CashBreakdown(amount);
-    // cashBreakdown.processBreakdown();
-    // if (cashBreakdown.returnAmount != 0.0) {
-    //   emit(state);
-    //   return cashBreakdown.returnAmount;
-    // } else {
-    //   state.cashBreakdown = cashBreakdown;
-    //   emit(state);
-    //   return null;
-    // }
     emit(state);
+    print(state.paymentMade);
     return amount;
   }
 }

@@ -6,12 +6,12 @@ import '../../cubit/payment/payment_cubit.dart';
 
 import 'payment_view.dart';
 
-class PaymentPage extends StatelessWidget {
-  const PaymentPage({Key key}) : super(key: key);
+class PaymentScreen extends StatelessWidget {
+  const PaymentScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) => PaymentCubit(23.40), child: PaymentView());
+        create: (_) => PaymentCubit(25.50), child: PaymentView());
   }
 }
