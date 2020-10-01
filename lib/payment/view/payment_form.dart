@@ -35,41 +35,41 @@ class PaymentFormState extends State<PaymentForm> {
         }
       },
       child: Expanded(
-          child: Column(
-        children: <Widget>[
-          Expanded(
-              child: Center(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
-              child: TextFormField(
-                controller: paymentAmount,
-                validator: (value) {
-                  var payment = double.tryParse(value) ?? 0;
-                  if (payment < widget._paymentState.amountDue) {
-                    return 'Payment amount is too low.';
-                  }
-                  return null;
-                },
-                style: TextStyle(fontSize: 25.0),
-                decoration: InputDecoration(
-                  hintText: "Payment Amount",
-                  isDense: true,
-                  prefixIcon: Text(
-                    "R ",
-                    style: TextStyle(fontSize: 30.0),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: Center(
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
+                child: TextFormField(
+                  controller: paymentAmount,
+                  validator: (value) {
+                    var payment = double.tryParse(value) ?? 0;
+                    if (payment < widget._paymentState.amountDue) {
+                      return 'Payment amount is too low.';
+                    }
+                    return null;
+                  },
+                  style: TextStyle(fontSize: 25.0),
+                  decoration: InputDecoration(
+                    hintText: "Payment Amount",
+                    isDense: true,
+                    prefixIcon: Text(
+                      "R ",
+                      style: TextStyle(fontSize: 30.0),
+                    ),
+                    prefixIconConstraints:
+                        BoxConstraints(minWidth: 0.0, minHeight: 0),
                   ),
-                  prefixIconConstraints:
-                      BoxConstraints(minWidth: 0.0, minHeight: 0),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    DecimalTextInputFormatter()
+                  ],
                 ),
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  DecimalTextInputFormatter()
-                ],
               ),
-            ),
-          )),
-          Column(children: <Widget>[
-            SizedBox(
+            )),
+            Column(children: <Widget>[
+              SizedBox(
                 width: double.infinity,
                 height: 50.0,
                 child: RaisedButton(
@@ -79,10 +79,23 @@ class PaymentFormState extends State<PaymentForm> {
 
                       var paymentBloc = BlocProvider.of<PaymentCubit>(context);
 
-                      print(paymentBloc.processPayment(payment));
+                      var owes = paymentBloc.processPayment(payment);
                       paymentBloc.close();
 
-                      Navigator.pushNamed(context, "/breakdown");
+                      // Navigator.pushNamed(context, "/breakdown");
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                            builder: (BuildContext context) {
+                          return Scaffold(
+                            appBar: AppBar(
+                              title: Text("Saved Suggestions"),
+                            ),
+                            body: Center(
+                              child: Text(owes.toString()),
+                            ),
+                          );
+                        }),
+                      );
                     } else {
                       showSnackBar(context, "Please correct the errors",
                           Colors.redAccent);
@@ -93,10 +106,12 @@ class PaymentFormState extends State<PaymentForm> {
                     style: TextStyle(fontSize: 20.0),
                   ),
                   color: Colors.greenAccent,
-                ))
-          ])
-        ],
-      )),
+                ),
+              )
+            ])
+          ],
+        ),
+      ),
     );
   }
 }
