@@ -29,7 +29,7 @@ class PaymentView extends StatelessWidget {
                 BlocBuilder<PaymentCubit, PaymentState>(
                   builder: (context, state) {
                     return Text(
-                      "R${state.amountDue.toStringAsFixed(2)}",
+                      "R${state.due.toStringAsFixed(2)}",
                       style: TextStyle(
                           fontSize: 25.0, fontWeight: FontWeight.bold),
                     );

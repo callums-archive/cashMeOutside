@@ -6,9 +6,14 @@ class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit(double initialAmount)
       : super(PaymentState(initAmountDue: initialAmount));
 
-  processPayment(double amount) {
+  double processPayment(double amount) {
+    print(state.due);
+    print(state.payment);
+    return state.payment;
+  }
+
+  void addPayment(double payment) {
+    state.payment = payment;
     emit(state);
-    print(state.paymentMade);
-    return amount;
   }
 }

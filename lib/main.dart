@@ -8,7 +8,7 @@ class CounterObserver extends BlocObserver {
   @override
   void onChange(Cubit cubit, Change change) {
     print(
-        "there are changes ${cubit.runtimeType} => ${change.currentState.paymentMade} ${change.nextState.paymentMade}");
+        "there are changes ${cubit.runtimeType} => ${change.currentState.payment} / ${change.currentState.due}");
     // print('${cubit.runtimeType} $change');
     super.onChange(cubit, change);
   }

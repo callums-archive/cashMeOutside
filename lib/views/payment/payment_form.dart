@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubit/payment/payment_cubit.dart';
 import '../../cubit/payment/payment_state.dart';
+import '../../cubit/payment/payment_cubit.dart';
 import '../../tools/decimal_text_input_formatter.dart';
 import '../../tools/snackbar.dart';
 
@@ -20,7 +20,6 @@ class PaymentForm extends StatefulWidget {
 
 class PaymentFormState extends State<PaymentForm> {
   final _formKey = GlobalKey<FormState>();
-
   bool _isValid = false;
   final paymentAmount = TextEditingController();
 
@@ -40,36 +39,37 @@ class PaymentFormState extends State<PaymentForm> {
         child: Column(
           children: <Widget>[
             Expanded(
-                child: Center(
-              child: Container(
-                padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
-                child: TextFormField(
-                  controller: paymentAmount,
-                  validator: (value) {
-                    var payment = double.tryParse(value) ?? 0;
-                    if (payment < widget._paymentState.amountDue) {
-                      return 'Payment amount is too low.';
-                    }
-                    return null;
-                  },
-                  style: TextStyle(fontSize: 25.0),
-                  decoration: InputDecoration(
-                    hintText: "Payment Amount",
-                    isDense: true,
-                    prefixIcon: Text(
-                      "R ",
-                      style: TextStyle(fontSize: 30.0),
+              child: Center(
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
+                  child: TextFormField(
+                    controller: paymentAmount,
+                    validator: (value) {
+                      var payment = double.tryParse(value) ?? 0;
+                      if (payment < widget._paymentState.due) {
+                        return 'Payment amount is too low.';
+                      }
+                      return null;
+                    },
+                    style: TextStyle(fontSize: 25.0),
+                    decoration: InputDecoration(
+                      hintText: "Payment Amount",
+                      isDense: true,
+                      prefixIcon: Text(
+                        "R ",
+                        style: TextStyle(fontSize: 30.0),
+                      ),
+                      prefixIconConstraints:
+                          BoxConstraints(minWidth: 0.0, minHeight: 0),
                     ),
-                    prefixIconConstraints:
-                        BoxConstraints(minWidth: 0.0, minHeight: 0),
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      DecimalTextInputFormatter()
+                    ],
                   ),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    DecimalTextInputFormatter()
-                  ],
                 ),
               ),
-            )),
+            ),
             Column(children: <Widget>[
               SizedBox(
                 width: double.infinity,
@@ -81,9 +81,11 @@ class PaymentFormState extends State<PaymentForm> {
 
                       var paymentBloc = BlocProvider.of<PaymentCubit>(context);
 
-                      var owes = paymentBloc.processPayment(payment);
+                      paymentBloc.addPayment(payment);
 
-                      print(owes);
+                      // var owes = paymentBloc.processPayment(payment);
+
+                      // print(owes);
 
                       // Navigator.pushNamed(context, "/breakdown");
                       Navigator.of(context).push(
@@ -94,7 +96,8 @@ class PaymentFormState extends State<PaymentForm> {
                               title: Text("Saved Suggestions"),
                             ),
                             body: Center(
-                              child: Text(owes.toString()),
+                              child:
+                                  Text(widget._paymentState.payment.toString()),
                             ),
                           );
                         }),
