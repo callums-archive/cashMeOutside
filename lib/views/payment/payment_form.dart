@@ -1,10 +1,12 @@
-import 'package:cashMeOutside/cubit/payment/payment_cubit.dart';
-import 'package:cashMeOutside/cubit/payment/payment_state.dart';
-import 'package:cashMeOutside/tools/decimal_text_input_formatter.dart';
-import 'package:cashMeOutside/tools/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../cubit/payment/payment_cubit.dart';
+import '../../cubit/payment/payment_state.dart';
+import '../../tools/decimal_text_input_formatter.dart';
+import '../../tools/snackbar.dart';
 
 class PaymentForm extends StatefulWidget {
   PaymentState _paymentState;
@@ -80,7 +82,8 @@ class PaymentFormState extends State<PaymentForm> {
                       var paymentBloc = BlocProvider.of<PaymentCubit>(context);
 
                       var owes = paymentBloc.processPayment(payment);
-                      paymentBloc.close();
+
+                      print(owes);
 
                       // Navigator.pushNamed(context, "/breakdown");
                       Navigator.of(context).push(
@@ -96,6 +99,8 @@ class PaymentFormState extends State<PaymentForm> {
                           );
                         }),
                       );
+
+                      paymentBloc.close();
                     } else {
                       showSnackBar(context, "Please correct the errors",
                           Colors.redAccent);

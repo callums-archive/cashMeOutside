@@ -1,6 +1,8 @@
-import 'package:bloc/bloc.dart';
-import 'package:cashMeOutside/payment/view/payment_page.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bloc/bloc.dart';
+
+import 'views/payment/payment_screen.dart';
 
 class CounterObserver extends BlocObserver {
   @override

@@ -1,6 +1,9 @@
-import 'package:cashMeOutside/cubit/payment/payment_cubit.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../cubit/payment/payment_cubit.dart';
+
 import 'payment_view.dart';
 
 class PaymentPage extends StatelessWidget {
